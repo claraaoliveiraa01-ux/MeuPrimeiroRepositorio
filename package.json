@@ -1,13 +1,1 @@
-{
-"name": "teste-type",
-"version": "1.0.0",
-"main": "index.js",
-"scripts": {
-"test": "echo \"Error: no test specified\" && exit 1",
-"start": "tsc && node ./dist/index.js"
-},
-"keywords": [],
-"author": "",
-"license": "ISC",
-"type ": "module"
-}
+{"name":"teste-type","version":"1.0.0","main":"index.js","scripts":{"test":"echo \"Error: no test specified\" && exit 1","start":"tsc && node ./dist/index.js"},"keywords":[],"author":"","license":"ISC","type ":"module","devDependencies":{"typescript":"^6.0.3"},"description":"","repository":{"type":"git","url":"git+https://github.com/claraaoliveiraa01-ux/MeuPrimeiroRepositorio.git"},"type":"commonjs","bugs":{"url":"https://github.com/claraaoliveiraa01-ux/MeuPrimeiroRepositorio/issues"},"homepage":"https://github.com/claraaoliveiraa01-ux/MeuPrimeiroRepositorio#readme"}
