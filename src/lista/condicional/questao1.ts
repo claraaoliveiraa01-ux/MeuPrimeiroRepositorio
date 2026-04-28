@@ -4,8 +4,9 @@
 let num:number=(Number(prompt("Informe o numero: ")))
 if(num>0){
     console.log("O valor é positivo: ")
-}else{
+}else if(num<0){
     console.log("O valor é negativo: ")
 }if(num%2==0){
     console.log("O valor é par" )
-}else(" O valor é impar ")
+}else{
+    console.log(" O valor é impar ")}

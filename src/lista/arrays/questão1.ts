@@ -13,9 +13,9 @@ for (let i=0; i<vetor.length -1; i++){
     if (vetor [i]%2 ==0){
         pares.push(vetor[i])
     }else if (vetor[i]%2==1){
-        impares[i]= vetor[i]
+        impares.push (vetor[i])
     }if (vetor[i]%2==0 && vetor[i]%3==0 && vetor[i]%4==0){
-        multi[i]=vetor[i]
+        multi.push(vetor[i])
     }
 }
 console.log ("Pares: "+pares)
