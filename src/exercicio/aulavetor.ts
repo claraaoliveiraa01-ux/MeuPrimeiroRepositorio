@@ -15,4 +15,7 @@ vetor.sort() //ordena em ordem alfabetica e crescente
 
 let paleta = vetor.join("-") //adiciona algo no meio
 
+let texto = vetor.toString()
+
+let posicao = vetor.indexOf("10")   //retorna a posição 
 console.log (vetor)
