@@ -1,0 +1,34 @@
+let totalInvestido = 0;
+let somaPrecos = 0;
+let contadorProdutos = 0;
+
+function entrada_da_compra(precoUnitario: number, quantidade: number): number {
+    let valorFinal = precoUnitario * quantidade;
+
+    if (quantidade > 10) {
+        valorFinal = valorFinal - (valorFinal * 0.05);
+    }
+
+    console.log("Valor final da compra: " + valorFinal);
+    return valorFinal
+}
+
+let precoUnitario = Number(prompt("Informe o preço unitário do produto ou 0 para sair: "));
+
+while (precoUnitario != 0) {
+    let quantidade = Number(prompt("Informe a quantidade de produtos da compra: "));
+
+     totalInvestido = entrada_da_compra(precoUnitario, quantidade);
+
+    
+
+    somaPrecos = somaPrecos+precoUnitario
+    contadorProdutos++;
+
+    precoUnitario = Number(prompt("Informe o preço unitário do produto ou 0 para sair: "));
+}
+
+let media = somaPrecos / contadorProdutos
+
+console.log("Total investido no estoque: " + totalInvestido)
+console.log("Média dos preços dos produtos: " + media)
