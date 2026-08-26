@@ -1,4 +1,5 @@
-class funcionario{
+export function quetao1():void{
+    class funcionario{
     //atributos
     nome: string;
     cargo:string;
@@ -21,4 +22,4 @@ class funcionario{
   s=Number(prompt("Informe o seu Salario:"))
   let novoFunc = new funcionario(n,c,s)
   novoFunc.exibirResumo()
-  continuar=String(prompt("Deseja continuar? S-sim N-não")).toUpperCase()}
+  continuar=String(prompt("Deseja continuar? S-sim N-não")).toUpperCase()}}
