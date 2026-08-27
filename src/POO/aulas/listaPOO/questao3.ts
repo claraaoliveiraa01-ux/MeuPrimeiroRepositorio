@@ -32,7 +32,7 @@ export function questao3():void{
     let novoComprimento
     let continuar:number=1
     while(continuar!=-1){
-    op = Number((prompt("Informe a opção: 1 para mudar os lados, 3 Para calcular Area, e 4 para calcular perimetro")))  
+    op = Number((prompt("Informe a opção: 1 para mudar os lados, 2 para retornar os lados, 3 Para calcular Area, e 4 para calcular perimetro")))  
     if(op==1){
     novaLargura = Number(prompt("Informe o comprimento:"));
     novoComprimento=Number(prompt("Informe a largura:"));
