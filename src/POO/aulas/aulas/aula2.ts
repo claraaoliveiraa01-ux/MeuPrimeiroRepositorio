@@ -12,7 +12,7 @@ export function quetao1():void{
     }
     //Metodos
     exibirResumo():void{
-        console.log("funcionario: ${this.mome} | Cargo : $ {this.cargo} | Salaro: $ {this.salario}");
+        console.log("funcionario: ${this.mome} | Cargo : $ {this.cargo} | Salario: $ {this.salario}");
     }
   }  let continuar:string = ""
   while(continuar!= "N"){

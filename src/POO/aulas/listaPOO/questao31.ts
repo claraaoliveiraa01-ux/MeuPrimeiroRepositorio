@@ -8,7 +8,7 @@ export function questao31():void{
 // Chamada polimórfica a descricaoCategoria() na exibição final.
 
 
-abstract class projeto{
+abstract class Projeto{
     private _titulo: string
     private _coordenador: string
     private _nota: number
@@ -36,7 +36,7 @@ abstract class projeto{
 
 
 }
-    class ProjetoVerde extends projeto{
+    class ProjetoVerde extends Projeto{
         constructor(tit:string, coor:string, nota:number){
             super(tit, coor, nota)
         }
@@ -47,7 +47,7 @@ abstract class projeto{
    
 
 
-    class ProjetoCultural extends projeto{
+    class ProjetoCultural extends Projeto{
     constructor(tit:string, coor:string, nota:number){
         super(tit, coor, nota)
     }
