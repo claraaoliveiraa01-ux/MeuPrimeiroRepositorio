@@ -1,5 +1,12 @@
 export function questao3():void{
-    class retangulo{
+//     3. Classe Retângulo: Crie uma classe que modele um retângulo:
+// A. Atributos: LadoA, LadoB (ou Comprimento e Largura, ou Base e Altura, a escolher)
+// B. Métodos:
+//  Mudar valor dos lados,
+//  Retornar/apresentar valor dos lados,
+//  Calcular Área,
+//  Calcular Perímetro.
+    class Retangulo{
         comprimento:number
         largura:number
         constructor(ladoA:number, ladoB:number){
@@ -16,7 +23,7 @@ export function questao3():void{
             console.log(`comprimento:${this.comprimento}, | largura:${this.largura}`)
         }
         calcularA():void{
-            console.log(this.largura*this.comprimento)
+            console.log(`A ares é:${this.largura*this.comprimento}`)
         }
         calcularP():void{
             console.log(2*(this.comprimento+this.largura))
@@ -26,7 +33,7 @@ export function questao3():void{
 
     let ladoA = Number(prompt("Informe o comprimento:"));
     let ladoB = Number(prompt("Informe a largura:"));
-    let ret = new retangulo(ladoA,ladoB)
+    let ret = new Retangulo(ladoA,ladoB)
     let op
     let novaLargura
     let novoComprimento
@@ -40,8 +47,9 @@ export function questao3():void{
     else if (op==2){
     ret.retornarLados()
     }
-    else if(op==3){ ret.calcularA();}
-    else if(op =4){
+    else if(op==3)
+    { ret.calcularA();}
+    else if(op==4){
     ret.calcularP();
     }
     continuar=Number(prompt("Informe a -1 para encerrar:"))}

@@ -11,7 +11,7 @@ class Quadrado{
         this.tamanho=novoT
     }
     retornaValor(){
-        return this.mudarValor
+        return this.tamanho
     }
     calcularArea(){
         let area=this.tamanho**2
@@ -22,9 +22,9 @@ let tamanho:number, novoT:number, quadrado
 tamanho=Number(prompt("Informe o tamanho dos lados: "))
 novoT=Number(prompt("Informe o novo tamanho: "))
 quadrado=new Quadrado(tamanho)
-quadrado.mudarValor
-quadrado.retornaValor
+quadrado.mudarValor(novoT)
+quadrado.retornaValor()
 quadrado.calcularArea()
 console.log("O novo tamanho é: " + quadrado.retornaValor())
-console.log("O tamanho é: "+tamanho)
+console.log("O tamanho antigo é: "+tamanho)
 }
