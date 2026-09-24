@@ -13,6 +13,7 @@ import { questao12 as qst12} from"./POO/aulas/listaPOO/questao12.js";
 import { questao13 as qst13} from"./POO/aulas/listaPOO/questao13.js";
 import { questao14 as qst14} from"./POO/aulas/listaPOO/questao14.js";
 import { questao15 as qst15 } from "./POO/aulas/listaPOO/questao15.js";
+import { questao16 as qst16 } from "./POO/aulas/listaPOO/questao16.js";
 import { questao31 as qst31 } from "./POO/aulas/listaPOO/questao31.js";
 document.getElementById("btn1")?.addEventListener("click",qst1)
 document.getElementById("btn2")?.addEventListener("click",qst2)
@@ -28,3 +29,5 @@ document.getElementById("btn11")?.addEventListener("click",qst11)
 document.getElementById("btn12")?.addEventListener("click",qst12)
 document.getElementById("btn13")?.addEventListener("click",qst13)
 document.getElementById("btn14")?.addEventListener("click",qst14)
+document.getElementById("btn15")?.addEventListener("click",qst15)
+document.getElementById("btn16")?.addEventListener("click",qst16)
