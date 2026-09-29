@@ -1,43 +1,146 @@
+export function questao17(): void {
 // 17. Abstração Herança Polimorfismo Repetição Encapsulamento Arrays
 // Controle de Frequência do Refeitório do IFS
 // O Refeitório do IFS deseja controlar o acesso de seus usuários. Todo usuário possui um identificador
 // numérico interno e o nome completo. Os usuários dividem-se em Alunos (que possuem o curso) e
 // Servidores (que possuem o departamento). O sistema deve pedir para o operador cadastrar os usuários
 // que estão na fila. Cada vez que um usuário passa pela catraca, um método deve registrar essa presença
-// em um histórico (array). Ao digitar um comando de encerramento, o programa exibe a listagem de
-// quem almoçou no dia, mostrando mensagens personalizadas para cada tipo de usuário através de um
-// método comum de identificação, além de exibir a quantidade total de acessos de alunos e servidores.
-abstract class Refeitório{
-    private _idNumerico: number
-    private _nomeC: string
-   
-    constructor(idNumerico:number, nomeC:string){
-        this._idNumerico= idNumerico
-        this._nomeC=nomeC
-    }
-     public get idNumerico(): number {
-        return this._idNumerico
-    }
-    public set idNumerico(value: number) {
-        this._idNumerico = value
-    }
-     public get nomeC(): string {
-        return this._nomeC
-    }
-    public set nomeC(value: string) {
-        this._nomeC = value
-    }
-}class alunos extends Refeitório{
-    curso:string
-    constructor(idNumerico:number, curso:string, nomeC:string){
-        super(idNumerico,nomeC)
-        this.curso=curso
-    }
-}
-    class servidores extends Refeitório {
-        departamento:string
-        constructor(idNumerico:number, nomeC:string, departamento:string) {
-            super(idNumerico, nomeC)
-            this.departamento=departamento
+// em um histórico (array). Ao digitar um comando de encerramento, o programa exibe a listagem de quem
+// almoçou no dia, mostrando mensagens personalizadas para cada tipo de usuário através de um método
+// comum de identificação, além de exibir a quantidade total de acessos de alunos e servidores.
+
+    abstract class Usuario {
+        private _id: number
+        private _nome: string
+
+        constructor(id: number, nome: string) {
+            this._id = id
+            this._nome = nome
+        }
+        public get id(): number {
+            return this._id
+        }
+        public set id(value: number) {
+            this._id = value
+        }
+        public get nome(): string {
+            return this._nome
+        }
+        public set nome(value: string) {
+            this._nome = value
+        }
+        abstract identificar(): string
+
+        exibirResumo(): string {
+            return `ID: ${this.id}
+            Nome: ${this.nome}
+            ${this.identificar()}`
         }
     }
+
+    class Aluno extends Usuario {
+        private _curso: string
+
+        constructor(id: number, nome: string, curso: string) {
+            super(id, nome)
+            this._curso = curso
+        }
+        public get curso(): string {
+            return this._curso
+        }
+        public set curso(value: string) {
+            this._curso = value
+        }
+
+        identificar(): string {
+            return `Aluno ${this.nome} do curso de ${this.curso} esteve presente hoje!`
+        }
+    }
+
+
+    class Servidor extends Usuario {
+        private _departamento: string
+
+        constructor(id: number, nome: string, departamento: string) {
+            super(id, nome)
+            this._departamento = departamento
+        }
+        public get departamento(): string {
+            return this._departamento
+        }
+        public set departamento(value: string) {
+            this._departamento = value
+        }
+
+        identificar(): string {
+            return `Servidor ${this.nome} do departamento de ${this.departamento} esteve presente hoje!`
+        }
+    }
+
+    let usuarios: Usuario[] = []
+    let historico: Usuario[] = []
+    let novoAluno:Aluno
+    let novoServidor:Servidor
+
+    let op = Number(prompt("Digite 1- para cadastrar novo usuário, 2- para registrar acesso ou 3- para finalizar:"))
+
+    while (op != 3) {
+        if (op == 1) {
+            let tipo = String(prompt("Tipo de usuário: 1-Aluno | 2-Servidor"))
+            let id = Number(prompt("Informe o id do usuário:"))
+            let nome = String(prompt("Informe o nome completo:"))
+
+            if (tipo === "1") {
+                let curso = String(prompt("Informe o curso do aluno:"))
+                novoAluno=new Aluno(id, nome, curso)
+                usuarios.push(novoAluno)
+            
+            } 
+            else if (tipo === "2") {
+                let departamento = String(prompt("Informe o departamento do servidor:"))
+                novoServidor=new Servidor(id, nome, departamento)
+                usuarios.push(novoServidor)
+
+            } 
+            else {
+                alert("Tipo inválido!")
+            }
+        } 
+        else if (op == 2) {
+            let idBusca = Number(prompt("Informe o identificador do usuário:"))
+            let usuario: Usuario | undefined = undefined
+
+            for (let i = 0; i < usuarios.length; i++) {
+                if (usuarios[i].id === idBusca) {
+                    usuario = usuarios[i]
+                }
+            }
+            if (usuario) {
+                historico.push(usuario)
+                alert("Acesso registrado!")
+
+            } 
+            else {
+                alert("Usuário indisponivel!")
+            }
+        }
+        op = Number(prompt("Digite 1- para cadastrar novo usuário, 2- para registrar acesso ou 3- para finalizar:"))
+    }
+    let mensagens = "PASSARAM NA CATRACA HOJE:"
+    let totalAlunos = 0
+    let totalServidores = 0
+
+    for (let usuario of historico){
+
+        if(usuario instanceof Aluno){
+            console.log(usuario.identificar())
+            totalAlunos++
+
+        } else if (usuario instanceof Servidor){
+            console.log(usuario.identificar())
+            totalServidores++
+        }
+    }
+    console.log(`${mensagens} Total de acessos de alunos: ${totalAlunos} Total de acessos de servidores: ${totalServidores}`)
+
+}

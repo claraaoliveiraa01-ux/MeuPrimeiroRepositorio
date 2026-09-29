@@ -1,92 +1,98 @@
-export function questao19() {
-    // 19. Repetição Encapsulamento Arrays
+// 19. Repetição Encapsulamento Arrays
 // Monitoramento de Sensores Industriais
-// Uma fábrica instalou sensores para monitorar sua produção. Todo sensor possui um código
-// identificador e a última leitura registrada. Um Sensor de Temperatura exibe sua leitura acompanhada
-// da unidade &quot;°C&quot; e possui um alerta caso passe dos 40°C. Um Sensor de Pressão exibe sua leitura
-// acompanhada de &quot;atm&quot; e alerta se passar de 5 atm. O programa deve solicitar repetidamente que o
-// técnico digite os valores lidos pelos sensores espalhados pela fábrica, armazenando-os em um array.
-// No final, o programa filtra a lista e exibe o relatório de todos os sensores que dispararam alertas de
-// perigo.
+// Uma fábrica instalou sensores para monitorar sua produção. Todo sensor possui um código identificador
+// e a última leitura registrada. Um Sensor de Temperatura exibe sua leitura acompanhada da unidade "°C"
+// e possui um alerta caso passe dos 40°C. Um Sensor de Pressão exibe sua leitura acompanhada de "atm" e
+// alerta se passar de 5 atm. O programa deve solicitar repetidamente que o técnico digite os valores
+// lidos pelos sensores espalhados pela fábrica, armazenando-os em um array. No final, o programa filtra
+// a lista e exibe o relatório de todos os sensores que dispararam alertas de perigo.
 
-    abstract class Sensor {
-        constructor(
-            private _codigo: string,
-            private _ultimaLeitura: number
-        ) {}
+export function questao19():void{
 
-        public get codigo(): string {
-            return this._codigo;
-        }
+abstract class Sensor{
+    private _codigoI: string
+    private _leitura: number
 
-        protected get ultimaLeitura(): number {
-            return this._ultimaLeitura;
-        }
-
-        abstract disparouAlerta(): boolean;
-        abstract exibirLeitura(): string;
+    constructor(codigoI:string, leitura:number){
+        this._codigoI=codigoI
+        this._leitura=leitura
+    }
+    public get codigoI(): string {
+        return this._codigoI
+    }
+    public set codigoI(value: string) {
+        this._codigoI = value
+    }
+    public get leitura(): number {
+        return this._leitura
+    }
+    public set leitura(value: number) {
+        this._leitura = value
     }
 
-    class SensorTemperatura extends Sensor {
-        constructor(codigo: string, ultimaLeitura: number) {
-            super(codigo, ultimaLeitura);
-        }
+    abstract exibirLeitura(): string
 
-        public disparouAlerta(): boolean {
-            return this.ultimaLeitura > 40;
-        }
+    abstract emAlerta(): boolean
+}
 
-        public exibirLeitura(): string {
-            return `${this.codigo}: ${this.ultimaLeitura}°C`;
-        }
+class SensorTemperatura extends Sensor{
+    exibirLeitura(): string {
+        return `Sensor ${this.codigoI}: ${this.leitura}°C`
+    }
+    emAlerta(): boolean {
+        return this.leitura > 40
+    }
+}
+
+class SensorPressao extends Sensor{
+    exibirLeitura(): string {
+        return (`Sensor ${this.codigoI}: ${this.leitura}atm`)
+    }
+    emAlerta(): boolean {
+        return this.leitura > 5
+    }
+}
+
+let sensores: Sensor[] = []
+let continuar=Number(prompt("Informe 1-cadastrar ou 2-para encerrar"))
+let temperatura:SensorTemperatura
+let pressao:SensorPressao
+
+while (continuar != 2) {
+    let tipo = Number(prompt("Tipo de sensor: 1-Temperatura | 2-Pressão"))
+    let codigo = String(prompt("Informe o código identificador do sensor:"))
+    let leitura = Number(prompt("Informe a leitura registrada:"))
+
+    if (tipo == 1) {
+        temperatura = new SensorTemperatura(codigo, leitura)
+        sensores.push(temperatura)
+    }
+    else if (tipo == 2) {
+        pressao = new SensorPressao(codigo, leitura)
+        sensores.push(pressao)
+    }
+    else {
+        alert("Tipo inexistente!")
+    }
+    continuar=Number(prompt("Informe 1-cadastrar | 2-para encerrar"))
+}
+
+let sensoresEmAlerta: Sensor[] = []
+for (let i = 0; i < sensores.length; i++) {
+    if (sensores[i].emAlerta()) {
+        sensoresEmAlerta.push(sensores[i])
+    }
+}
+if (sensoresEmAlerta.length > 0) {
+    let relatorio = "SENSORES EM ALERTA"
+
+    for (let i = 0; i < sensoresEmAlerta.length; i++) {
+        relatorio += sensoresEmAlerta[i].exibirLeitura()
+    }
+    console.log(relatorio)
+    }   
+    else {
+    console.log("Nenhum sensor disparou alerta.")
     }
 
-    class SensorPressao extends Sensor {
-        constructor(codigo: string, ultimaLeitura: number) {
-            super(codigo, ultimaLeitura);
-        }
-
-        public disparouAlerta(): boolean {
-            return this.ultimaLeitura > 5;
-        }
-
-        public exibirLeitura(): string {
-            return `${this.codigo}: ${this.ultimaLeitura} atm`;
-        }
-    }
-
-        let sensores: Sensor[] = [];
-
-        while (true) {
-            let tipo = prompt("Cadastrar Sensor:\n1 - Temperatura\n2 - Pressão\n0 - Encerrar")?.trim();
-            if (tipo === "0" || !tipo) break;
-
-            let codigo = prompt("Código do sensor:")?.trim() ?? "";
-            let leitura = Number(prompt("Valor da última leitura:"));
-
-            if (!codigo || isNaN(leitura)) {
-                alert("Dados inválidos. Tente novamente.");
-                continue;
-            }
-
-            if (tipo === "1") {
-                sensores.push(new SensorTemperatura(codigo, leitura));
-            } else if (tipo === "2") {
-                sensores.push(new SensorPressao(codigo, leitura));
-            } else {
-                alert("Opção inválida.");
-            }
-        }
-
-        let sensoresEmPerigo = sensores.filter(s => s.disparouAlerta());
-
-        if (sensoresEmPerigo.length > 0) {
-            let relatorio = "--- ALERTAS DE PERIGO ---\n";
-            sensoresEmPerigo.forEach(s => {
-                relatorio += s.exibirLeitura() + "\n";
-            });
-            alert(relatorio);
-        } else {
-            alert("Todos os sensores operam dentro da normalidade.");
-        }
-    }
+}
