@@ -60,7 +60,7 @@ let carros:Carro
 let motos:Moto
 
 while(op!=2){
-    let tipo:number=Number(prompt("Informe o tipo de veículo: (1-Comum/2-Estudantil"))
+    let tipo:number=Number(prompt("Informe o tipo de veículo: 1-Comum ou 2-Estudantil"))
 
     let placa=Number(prompt("Informe a placa do veículo: "))
     let horaEntrada=Number(prompt("Informe o horário de entrada: "))
