@@ -29,10 +29,10 @@ class UsuarioSistema {
     }
     verificarSenha():void{
         if(this.senha == this.login){
-            alert("ERRO! O login e a senha não podem ser iguais ")
+            alert("O login e a senha não podem ser iguais ")
         }
         if(this.senha.length <= 6){
-            alert("ERRO! A senha tem que ter pelo menos 6 caracteres")
+            alert("A senha tem que ter pelo menos 6 caracteres")
         }
     }
 }
@@ -48,4 +48,4 @@ while(opcao != 2 ) {
         usuario = new UsuarioSistema(login, senha)
         usuario.verificarSenha()
 }
-}
+}
