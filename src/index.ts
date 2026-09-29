@@ -19,7 +19,11 @@ import { questao18 as qst18 } from "./POO/aulas/listaPOO/questao18.js";
 import { questao19 as qst19 } from "./POO/aulas/listaPOO/questao19.js";
 import { questao21 as qst21 } from "./POO/aulas/listaPOO/questao21.js";
 import { questao22 as qst22 } from "./POO/aulas/listaPOO/questao22.js";
+import { questao30 as qst30 } from "./POO/aulas/listaPOO/questao30.js";
 import { questao31 as qst31 } from "./POO/aulas/listaPOO/questao31.js";
+import { questao34 as qst34 } from "./POO/aulas/listaPOO/questao34.js";
+import { questao45 as qst45 } from "./POO/aulas/listaPOO/questao45.js";
+import { questao46 as qst46 } from "./POO/aulas/listaPOO/questao46.js";
 document.getElementById("btn1")?.addEventListener("click",qst1)
 document.getElementById("btn2")?.addEventListener("click",qst2)
 document.getElementById("btn3")?.addEventListener("click",qst3)
@@ -41,3 +45,8 @@ document.getElementById("btn18")?.addEventListener("click",qst18)
 document.getElementById("btn19")?.addEventListener("click",qst19)
 document.getElementById("btn21")?.addEventListener("click",qst21)
 document.getElementById("btn22")?.addEventListener("click",qst22)
+document.getElementById("btn30")?.addEventListener("click",qst30)
+document.getElementById("btn31")?.addEventListener("click",qst31)
+document.getElementById("btn34")?.addEventListener("click",qst34)
+document.getElementById("btn45")?.addEventListener("click",qst45)
+document.getElementById("btn46")?.addEventListener("click",qst46)

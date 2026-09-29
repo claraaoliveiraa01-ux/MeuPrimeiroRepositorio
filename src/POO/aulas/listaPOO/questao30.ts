@@ -1,112 +1,82 @@
 
 export function questao30(): void {
 
+    // 30. O Sistema de Bilhetagem de Transporte Intermunicipal
+// O sistema de transportes da região precisa de um software para gerenciar a venda de passagens. Crie
+// um modelo onde cada passagem possua o nome do passageiro, CPF e o valor base da corrida. Garanta
+// que esses dados não sejam alterados diretamente de fora da classe. Existem duas modalidades: a
+// Passagem Comum e a Passagem Estudantil (que aplica automaticamente 50% de desconto no valor
+// base). O programa deve solicitar ao usuário, em um laço de repetição, os dados de várias passagens e
+// o seu tipo. No final, o sistema exibe o relatório de todas as passagens vendidas e calcula o
+// faturamento total do dia utilizando uma estrutura de redução ou soma acumulada.
+
     class Passagem {
         private _nome: string
-        private _cpf: string
+        private _cpf: number
         private _valorBase: number
 
-        constructor(nome: string, cpf: string, valorBase: number) {
+        constructor(nome: string, cpf: number, valorBase: number) {
             this._nome = nome
             this._cpf = cpf
             this._valorBase = valorBase
         }
 
-        public get nome(): string {
+        get nome(): string {
             return this._nome
         }
-
-        public get cpf(): string {
+        get cpf(): number {
             return this._cpf
         }
-
-        public get valorBase(): number {
+        get valorBase(): number {
             return this._valorBase
         }
-
-        calcularValor(): number {
-            return this._valorBase
-        }
-
-        relatorio(): void {
-            console.log(`Nome: ${this.nome} CPF: ${this.cpf} Valor: R$ ${this.calcularValor().toFixed(2)}`)
-        }
-    }
-
-    class PassagemComum extends Passagem {
 
         calcularValor(): number {
             return this.valorBase
         }
 
-        relatorio(): void {
-            console.log(`Passagem Comum Nome: ${this.nome} CPF: ${this.cpf} Valor: R$ ${this.calcularValor().toFixed(2)}`)
+        exibir(): void {
+            console.log(`Nome: ${this.nome} | CPF: ${this.cpf} | Valor: R$${this.calcularValor()}`)
         }
     }
-
-    class PassagemEstudantil extends Passagem {
-
+    class Estudantil extends Passagem {
         calcularValor(): number {
-            return this.valorBase * 0.5
-        }
-
-        relatorio(): void {
-            console.log(`Passagem Estudantil Nome: ${this.nome} CPF: ${this.cpf} Valor com desconto: R$ ${this.calcularValor().toFixed(2)}`)
+            let valorFinal: number = this.valorBase * 0.5
+            return valorFinal
         }
     }
 
-    let ListaPassagem: Passagem[] = []
+let passagens:Passagem[]=[]
+let comum:Passagem
+let estudantil:Estudantil
 
-    let nome: string
-    let cpf: string
-    let valorBase = 50
-    let opcao = 0
+let op=0
+while(op!=2){
+    let tipo:number=Number(prompt("Informe o tipo da passagem: 1-Comum ou 2-Estudantil"))
 
-    let passagemComum: PassagemComum
-    let passagemEstudantil: PassagemEstudantil
+    let nome=String(prompt("Informe o nome do passageiro: "))
+    let cpf=Number(prompt("Informe o cpf: "))
+    let valorB=Number(prompt('Informe o valor base: '))
 
-    while (opcao != 3) {
+    if(tipo==1){
+        comum = new Passagem(nome,cpf,valorB)
+        passagens.push(comum)
+    }
+    else if(tipo==2){
+        estudantil = new Estudantil(nome, cpf, valorB)
+        passagens.push(estudantil)
+    }
+    else{
+        alert("Opção Inválida1")
+    }
+    op=Number(prompt("Deseja cadastrar outra passagem? 1-sim  2-não) "))
+}
+ let faturamentoTotal: number = 0
 
-        opcao = Number(prompt(`Informe o tipo de passagem:
-        1 - Comum
-        2 - Estudantil
-        3 - Sair`))
-
-        if (opcao == 1) {
-
-            nome = String(prompt("Informe seu nome:"))
-            cpf = String(prompt("Digite seu CPF:"))
-
-            passagemComum = new PassagemComum(nome, cpf, valorBase)
-
-            ListaPassagem.push(passagemComum)
-
-        }
-        else if (opcao == 2) {
-
-            nome = String(prompt("Informe seu nome:"))
-            cpf = String(prompt("Digite seu CPF:"))
-
-            passagemEstudantil = new PassagemEstudantil(nome, cpf, valorBase)
-
-            ListaPassagem.push(passagemEstudantil)
-        }
-         opcao = Number(prompt(`Informe o tipo de passagem:
-        1 - Comum
-        2 - Estudantil
-        3 - Sair`))
+    for (let passagem of passagens) {
+        passagem.exibir()
+        faturamentoTotal += passagem.calcularValor()
     }
 
-    let faturamentoTotal = 0
-
-    console.log("PASSAGENS VENDIDAS:")
-
-    for (let i = 0; i < ListaPassagem.length; i++) {
-
-        ListaPassagem[i].relatorio()
-
-        faturamentoTotal += ListaPassagem[i].calcularValor()
-    }
-
-    console.log(`Faturamento total do dia: R$ ${faturamentoTotal.toFixed(2)}`)
+    alert(`O faturamento total do dia foi de: R$${faturamentoTotal}`)
 }
